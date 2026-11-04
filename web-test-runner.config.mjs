@@ -1,5 +1,6 @@
 import { defaultReporter, summaryReporter } from '@web/test-runner';
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import { chromeOptions } from './scripts/chrome-for-testing/browser-runtime.cjs';
 
 // rootDir reaches one level up so a test can import clayjs's own region-policy.
 // The save-domain projection these tests compare is the host's definition of
@@ -11,6 +12,6 @@ export default {
   testFramework: { config: { timeout: 20000 } },
   nodeResolve: true,
   files: 'test/**/*.test.js',
-  browsers: [playwrightLauncher({ product: 'chromium' })],
+  browsers: [playwrightLauncher({ product: 'chromium', launchOptions: chromeOptions() })],
   reporters: [summaryReporter(), defaultReporter()],
 };
